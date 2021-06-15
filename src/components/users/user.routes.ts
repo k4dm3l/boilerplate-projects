@@ -7,5 +7,14 @@ export const userRouter = (expressApp: Application) => {
 
   expressApp.use('/api/v1/user', router);
 
+  // - GET
   router.get('/', userController.getUserList);
+
+  // - POST
+
+  // - PATCH
+
+  // - PUT
+
+  // - DELETE
 };

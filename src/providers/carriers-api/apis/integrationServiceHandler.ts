@@ -1,5 +1,7 @@
+import { IContractCredentials } from '../../../Interfaces/IContractCredentials';
+
 export default abstract class IntegrationServicesHandler {
-  constructor(carrierCredentials: any) {
+  constructor(carrierCredentials: IContractCredentials) {
     //Define properly interface for this constructor parameter
   }
 
