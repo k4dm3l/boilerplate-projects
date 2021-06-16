@@ -1,8 +1,8 @@
-import { IKeyMapping } from '../../Interfaces/IKeyMapping';
+import { IKeyMapping } from '../../interfaces/IKeyMapping';
 
 // - CarrierIntegrations
 import Fedex from './apis/fedex';
 
-export const integratedService: IKeyMapping = {
+export const integratedServices: IKeyMapping = {
   fedex: Fedex,
 };

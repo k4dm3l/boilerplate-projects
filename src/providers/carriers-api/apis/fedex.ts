@@ -1,5 +1,7 @@
 import IntegrationServicesHandler from './integrationServiceHandler';
-import { IContractCredentials } from '../../../Interfaces/IContractCredentials';
+import { IContractCredentials } from '../../../interfaces/IContractCredentials';
+import { IPayloadLTLRates } from '../../../interfaces/IPayloadLTLRates';
+import { IResponseLTLRates } from '../../../interfaces/IResponseLTLRates';
 
 export default class Fedex extends IntegrationServicesHandler {
   carrierCredentials: IContractCredentials = {};
@@ -16,7 +18,15 @@ export default class Fedex extends IntegrationServicesHandler {
    *
    * @param payloadLTLRates
    */
-  async getLTLRates(payloadLTLRates: any): Promise<any> {}
+  async getLTLRates(
+    payloadLTLRates: IPayloadLTLRates
+  ): Promise<IResponseLTLRates> {
+    return {
+      error: true,
+      message: 'Not integrated yet',
+      data: null,
+    };
+  }
 
   /**
    *
