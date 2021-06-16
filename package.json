@@ -6,7 +6,6 @@
   "scripts": {
     "start": "npm run compile && node ./build",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "shx rm -rf build/ && tsc"
   },
   "keywords": [],
@@ -18,6 +17,7 @@
     "@types/express": "^4.17.12",
     "@types/morgan": "^1.9.2",
     "@types/multer": "^1.4.5",
+    "@types/request": "^2.48.5",
     "eslint": "^7.28.0",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -28,14 +28,22 @@
   },
   "dependencies": {
     "@hapi/boom": "^9.1.2",
+    "axios": "^0.21.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
     "helmet": "^4.6.0",
     "joi": "^17.4.0",
+    "jwks-rsa": "^2.0.3",
+    "mongoose": "^5.12.14",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "shx": "^0.3.3"
+    "query-string": "^7.0.0",
+    "request": "^2.88.2",
+    "sequelize": "^6.6.2",
+    "shx": "^0.3.3",
+    "socket.io": "^4.1.2"
   }
 }
