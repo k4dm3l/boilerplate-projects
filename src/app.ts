@@ -3,8 +3,12 @@ import compression from 'compression';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import express, { Application } from 'express';
+import { initServerSocketConnection } from './utils/libraries/sockets';
+import MongoDBConnection from './databases/mongoose';
+import SequelizeDBConnection from './databases/sequelize';
 
 import env from './configs';
+
 import {
   notFoundHandler,
   wrapErrors,
@@ -36,8 +40,43 @@ app.use(errorHandler);
 // - Start Server
 const startServer = async (port: number) => {
   try {
-    app.listen(port, () => console.log(`Running on http://localhost:${port}`));
-    // Add DB connection HERE
+    const server = app.listen(port, () =>
+      console.log(`Running on http://localhost:${port}`)
+    );
+
+    initServerSocketConnection(server);
+
+    if (env.sequelizeDatabase) {
+      const sequelize: SequelizeDBConnection = new SequelizeDBConnection({
+        username: env.sequelizeConfiguration.username,
+        password: env.sequelizeConfiguration.password,
+        database: env.sequelizeConfiguration.database,
+        configuration: {
+          host: env.sequelizeConfiguration.configuration.host,
+          port: parseInt(
+            env.sequelizeConfiguration.configuration.port || '0',
+            10
+          ),
+          dialect: env.sequelizeConfiguration.configuration.dialect,
+          logging: env.sequelizeConfiguration.configuration.logging,
+        },
+      });
+
+      await sequelize.connectDatabase();
+    }
+
+    // Add mongo DB connection HERE
+    if (env.mongoDatabase) {
+      const mongoose: MongoDBConnection = new MongoDBConnection({
+        username: env.mongoConfiguration.username,
+        password: env.mongoConfiguration.password,
+        host: env.mongoConfiguration.host,
+        database: env.mongoConfiguration.database,
+        configurations: env.mongoConfiguration.configuration,
+      });
+
+      await mongoose.connectDatabase();
+    }
   } catch (error) {
     process.on('uncaughtException', handlerExceptionError(error));
     process.on('unhandledRejection', handlerExceptionError(error));
